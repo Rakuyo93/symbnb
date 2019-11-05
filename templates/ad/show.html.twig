@@ -7,6 +7,7 @@
 {% block body %}
 
     <div class="ad-title" style="background-image: url({{ ad.coverImage }})">
+
         <div class="container">
             <h1>{{ ad.title }}</h1>
             <p>{{ ad.introduction }}</p>
@@ -18,6 +19,12 @@
                 par nuit
             </p>
             <a href="#" class="btn btn-primary">Réserver !</a>
+
+            {% if app.user and app.user == ad.author %}
+                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-secondary">Modifier l'annonce</a>
+
+                <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger" onclick="return confirm(`Etes-vous de vouloir supprimer l'annonce : {{ad.title}} ?`)">Supprimer l'annonce</a>
+            {% endif %}
         </div>
     </div>
 
